@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>To-Do List</title>
+    <script src="todo.ts"></script>
+  </head>
+  <body>
+    <h1>To-Do List</h1>
+    <form (submit)="addTodoItem(newTodoText.value); newTodoText.value=''">
+      <label for="newTodoText">New Todo:</label>
+      <input type="text" id="newTodoText" #newTodoText required>
+      <button type="submit">Add Todo</button>
+    </form>
+    <ul>
+      <li *ngFor="let todoItem of todoList">
+        <input type="checkbox" [checked]="todoItem.completed" (change)="toggleTodoItem(todoItem)">
+        <span [class.completed]="todoItem.completed">{{ todoItem.text }}</span>
+        <button (click)="removeTodoItem(todoItem)">Remove</button>
+      </li>
+    </ul>
+    <button (click)="clearCompletedTodoItems()">Clear Completed</button>
+  </body>
+</html>
